@@ -25,7 +25,6 @@ public class TdFinApplication {
         return new BCryptPasswordEncoder();
     }
     public void run(String... args) throws Exception {
-        // TODO block d'initialisation
         accountService.saveUser(new AppUser("admin", "1234",null));
         accountService.saveUser(new AppUser("user", "1234",null));
         accountService.saveRole(new AppRole("ADMIN"));
