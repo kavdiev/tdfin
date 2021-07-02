@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
@@ -20,6 +20,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("USER","ADMIN");
+        auth.inMemoryAuthentication().withUser("user").password("{noop}1234").roles("USER");
+
+/*
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery(
                         "select username as principal ,password from app_user where username=?")
@@ -27,12 +32,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "select app_user_username as principal , roles_role_name as role from app_user_roles "
                                 + "where app_user_username=?")
                 .passwordEncoder(bCryptPasswordEncoder).rolePrefix("ROLE_");
+                */
+
     }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        http.formLogin().disable();
+        //http.formLogin().disable();
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/login/**","register/**", "/h2/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/**").hasRole("ADMIN");
