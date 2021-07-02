@@ -34,4 +34,13 @@ public class Article {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", titre='" + titre + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

@@ -19,7 +19,10 @@ public class AppUser {
     @ManyToMany(fetch= FetchType.EAGER)
     private Collection<AppRole> roles=new ArrayList<>();
 
-    public AppUser(String password, String username, Collection<AppRole> roles) {
+    public AppUser() {
+    }
+
+    public AppUser(String username, String password, Collection<AppRole> roles) {
         this.password = password;
         this.username = username;
         this.roles = roles;
@@ -55,5 +58,15 @@ public class AppUser {
 
     public void setRoles(Collection<AppRole> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "id=" + id +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

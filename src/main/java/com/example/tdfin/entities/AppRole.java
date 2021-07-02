@@ -14,6 +14,9 @@ public class AppRole {
         return roleName;
     }
 
+    public AppRole() {
+    }
+
     public AppRole(String roleName) {
         this.roleName = roleName;
     }
@@ -28,5 +31,13 @@ public class AppRole {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "AppRole{" +
+                "id=" + id +
+                ", roleName='" + roleName + '\'' +
+                '}';
     }
 }

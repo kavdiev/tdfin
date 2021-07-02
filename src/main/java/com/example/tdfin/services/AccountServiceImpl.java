@@ -24,16 +24,19 @@ public class AccountServiceImpl implements AccountService {
 		@Override
 		public AppUser saveUser(AppUser user) {
 			// TODO Auto-generated method stub
+			System.out.println("user " + user);
 			String hashPW=bCryptPasswordEncoder.encode(user.getPassword());
 			
 			user.setPassword(hashPW);
-			
+
+			System.out.println("user to save " + user);
 			return userRepository.save(user);
 		}
 
 		@Override
 		public AppRole saveRole(AppRole role) {
 			// TODO Auto-generated method stub
+			System.out.println("role " + role);
 			return roleRepository.save(role);
 		}
 
@@ -44,12 +47,12 @@ public class AccountServiceImpl implements AccountService {
 			AppRole role=roleRepository.findByRoleName(roleName);
 			AppUser user = userRepository.findByUsername(username);
 			user.getRoles().add(role);
-			
 		}
 
 		@Override
 		public AppUser findUserByUsername(String username) {
 			// TODO Auto-generated method stub
+			System.out.println("find username " + username);
 			return userRepository.findByUsername(username);
 		}
 }
